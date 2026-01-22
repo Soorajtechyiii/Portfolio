@@ -1,0 +1,345 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+/* Button styles */
+.btn.ghost {
+  background: transparent;
+  color: var(--text);
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.06);
+  transition: background 0.18s ease, transform 0.12s ease;
+}
+.btn.ghost:hover { background: rgba(255,255,255,0.03); transform: translateY(-2px); }
+
+/* My Journey timeline */
+.my-journey { position: relative; max-width: 1100px; margin: 2.5rem auto; padding: 1rem 16px; }
+:root { --date-w: 150px; --gutter: 40px; --line-color: var(--accent); }
+.my-journey::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--date-w) + (var(--gutter)/2) - 1px);
+  top: 0; bottom: 0;
+  width: 2px;
+  background: var(--line-color);
+  opacity: 0.95;
+}
+.journey-row {
+  display: grid;
+  grid-template-columns: var(--date-w) var(--gutter) 1fr;
+  gap: 16px;
+  align-items: start;
+  padding: 18px 0;
+}
+.journey-date {
+  text-align: right;
+  padding-right: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.journey-line {
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.journey-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--line-color);
+  border: 3px solid var(--panel);
+  box-shadow: 0 6px 18px rgba(2,6,23,0.35);
+  transform: translateY(4px);
+}
+.journey-content h4 {
+  margin: 0 0 6px 0;
+  font-size: 1.05rem;
+  color: var(--text);
+  font-weight: 700;
+}
+.journey-content p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.journey-row + .journey-row {
+  border-top: 1px dashed rgba(255,255,255,0.03);
+}
+
+/* Existing tablet responsiveness */
+@media (max-width:900px){
+  :root { --date-w:110px; --gutter:36px; }
+  .my-journey::before {
+    left: calc(var(--date-w) + (var(--gutter)/2) - 1px);
+  }
+}
+
+@media (max-width:600px){
+  .journey-row {
+    grid-template-columns: 1fr 40px 1fr;
+    padding: 14px 0;
+  }
+  .journey-date {
+    text-align: right;
+    padding-right: 8px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ------------------------- */
+/*   EXTRA MOBILE FIXES      */
+/* ------------------------- */
+
+/* For tablet & mobile */
+@media (max-width: 900px) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 30px;
+    padding: 20px;
+  }
+
+  .hero-left {
+    width: 100%;
+  }
+
+  .hero-right {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .profile-card {
+    width: 90%;
+    max-width: 350px;
+  }
+}
+
+/* Mobile devices */
+@media (max-width: 600px) {
+
+  /* Hero text */
+  .hero-left h1 {
+    font-size: 1.7rem;
+  }
+
+  .hero-left .lead {
+    font-size: 0.95rem;
+  }
+
+  .hero-left .meta {
+    font-size: 0.9rem;
+  }
+
+  /* Buttons full width */
+  .hero-cta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .hero-cta .btn {
+    width: 100%;
+    text-align: center;
+    padding: 12px 0;
+  }
+
+  /* Profile card */
+  .profile-card {
+    padding: 20px;
+  }
+
+  /* Journey timeline more compact */
+  .journey-row {
+    grid-template-columns: 1fr 30px 1fr;
+    gap: 10px;
+  }
+  .journey-date {
+    font-size: 0.85rem;
+    padding-right: 5px;
+  }
+  .journey-content h4 {
+    font-size: 1rem;
+  }
+  .journey-content p {
+    font-size: 0.9rem;
+  }
+
+  /* Projects section */
+  .projects-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px;
+  }
+  .project {
+    padding: 15px;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .show-more .btn {
+    width: 100%;
+  }
+}
+
+/* MOBILE FIX FOR MY JOURNEY SECTION */
+
+/* Full desktop layout remains unchanged */
+
+/* Mobile (below 600px) - STACK EVERYTHING */
+@media (max-width: 600px) {
+
+  /* Timeline becomes one-column */
+  .journey-row {
+    display: flex;
+    flex-direction: column;
+    padding-left: 25px;
+    position: relative;
+  }
+
+  /* Move the connecting vertical line to the left */
+  .my-journey::before {
+    left: 12px !important;
+  }
+
+  /* Date appears above the content */
+  .journey-date {
+    text-align: left;
+    padding: 0 0 5px 0;
+    font-size: 0.9rem;
+  }
+
+  /* Dot aligns with the main vertical line */
+  .journey-line {
+    position: absolute;
+    left: 6px;
+    top: 35px;
+  }
+
+  .journey-dot {
+    transform: translateY(0);
+  }
+
+  /* Content takes full width */
+  .journey-content {
+    margin-left: 0;
+    margin-top: 15px;
+  }
+
+  .journey-content h4 {
+    font-size: 1rem;
+  }
+
+  .journey-content p {
+    font-size: 0.9rem;
+    line-height: 1.45;
+  }
+}
+</style>
+
+<section class="hero">
+  <div class="hero-left">
+    <h1>Hi, I'm <span class="accent">Sooraj A</span></h1>
+    <p class="lead">Enthusiastic and  focused on building reliable, user-friendly full-stack applications.I thrive on creating innovative solutions and delivering high quality high results.My portfolio showcases my project that reflect my
+      ability to tackle complex challenges and deliver impactful results.
+    </p>
+    <p class="meta">Skills: Python . Django . JavaScript . React . PostgreSQL . Docker . HTML . CSS <br>. MySQL . J-query . AJAX 
+      . SQL . Bootstrap .REST APIs  . API  .Git . GitHub . CI/CD pipelines . Linux . Agile methodologies . Agile . C++ . Kuberneetes
+      </p>
+    <div class="hero-cta">
+      <a class="btn primary" href="{% url 'myapp:projects' %}">See projects</a>
+      <a class="btn ghost" href="static/resume.pdf" download>Download My Resume</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="card profile-card">
+      <div class="profile-avatar" aria-hidden="true">SA</div>
+      <h3>Sooraj A</h3>
+      <p class="muted">Junior Software Developer</p>
+      <ul class="profile-stats">
+        <li><strong>3+</strong><span class="muted">projects</span></li>
+        <li><strong>Python</strong><span class="muted">Primary</span></li>
+        <li><strong>Full-stack</strong><span class="muted">Enthusiast</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+
+<!-- career section -->
+<h1 style="text-align: center;">My Journey</h1>
+<div class="my-journey" aria-labelledby="journey-heading">
+
+  <div class="journey-row">
+    <div class="journey-date">2017-2019</div>
+    <div class="journey-line"><span class="journey-dot"></span></div>
+    <div class="journey-content">
+      <h4>Pre-degree</h4>
+      <p>I started my tech career by learning C++, HTML, MySQL.</p>
+    </div>
+  </div>
+
+  <div class="journey-row">
+    <div class="journey-date">2019-2023</div>
+    <div class="journey-line"><span class="journey-dot"></span></div>
+    <div class="journey-content">
+      <h4>Started my Engineering career</h4>
+      <p>Pursued my higher education in <b>Bachelor's of Engineering in Mechatronics</b>. Throughout my academics I learned various skills. I choose Python as my primary language to build, develop and deploy applications. Additionally, I learned system design and Machine Learning.</p>
+    </div>
+  </div>
+
+  <div class="journey-row">
+    <div class="journey-date">2023-2024</div>
+    <div class="journey-line"><span class="journey-dot"></span></div>
+    <div class="journey-content">
+      <h4>Course</h4>
+      <p>I completed a 6-month course in Full-stack development. During this time I built a Library Management System, Insurance CRM, and Weather App.</p>
+    </div>
+  </div>
+
+  <div class="journey-row">
+    <div class="journey-date">2024-2026</div>
+    <div class="journey-line"><span class="journey-dot"></span></div>
+    <div class="journey-content">
+      <h4>My first Job</h4>
+      <p>I started my career at <b>ALTOS TECHNOLOGIES</b> Kochi as a Python developer. The experience helped me gain real-world exposure and adapt to new technologies.</p>
+    </div>
+  </div>
+
+</div>
+
+<section class="showcase">
+  <h2>Projects</h2>
+  <div class="grid projects-grid">
+
+    <article class="project">
+      <img src="https://www.skoolbeep.com/blog/wp-content/uploads/2020/12/HOW-DO-YOU-DESIGN-A-LIBRARY-MANAGEMENT-SYSTEM-min.png" alt="Library Management System" width="90%" height="50%" class="project-img">
+      <h3>Library Management system</h3>
+      <p class="muted">A complete library management system built with Django. Features include user roles (admin/librarian/member), book checkout/return, search, and reporting.</p>
+      <div class="tags"><span>django</span><span>react</span><span>api</span></div>
+    </article>
+
+    <article class="project">
+      <img src="https://marketplace.canva.com/EdriA/MAFMW9EdriA/1/tl/canva-chat-bot-or-futuristic-head-with-different-emotions-and-symbols-on-face-vector-illustration.-cute-chatbot-avatar-flat-icon-MAFMW9EdriA.png" alt="DevBlog" width="90%" height="48%" class="project-img">
+      <h3>My Personal Chatbot "Nebula"</h3>
+      <p class="muted">Personal chatbot assistant to help and deliver messages to user's needs.</p>
+      <div class="tags"><span>python</span><span>ci</span></div>
+    </article>
+
+    <article class="project">
+      <img src="https://cdn3d.iconscout.com/3d/premium/thumb/insurance-payment-9465495-7693433.png?f=webp" alt="Insurance CRM" width="90%" height="50%" class="project-img">
+      <h3>Insurance CRM</h3>
+      <p class="muted">This project is a specialized, full-featured Insurance CRM designed to empower agents and brokers by centralizing.</p>
+      <div class="tags"><span>node</span><span>docker</span></div>
+    </article>
+
+  </div>
+</section>
+
+{% endblock %}

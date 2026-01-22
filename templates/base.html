@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Sooraj A — Junior Software Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="{% url 'myapp:home' %}">Sooraj A<span class="muted"> — Dev</span></a>
+      <nav class="nav">
+        <a href="{% url 'myapp:about' %}">About</a>
+      </nav>
+      <div class="controls">
+        <button id="themeToggle" class="btn small">Toggle</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container site-main">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>Sooraj A</strong> — sooraj6446@gmail.com • Palakkad, India  
+        <p class="margin-right" style="gap:80%;"><i class="fa-brands fa-linkedin fa-3x"></i>
+        <i class="fa-brands fa-github fa-3x"></i>
+        </p>
+      </div>
+      <div class="muted"></div>
+    </div>
+  </footer>
+
+  <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

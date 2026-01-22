@@ -1,0 +1,305 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+/* Modal background */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Show modal when targeted */
+.modal:target {
+  display: flex;
+}
+
+/* Modal box */
+.modal-content {
+  background: #ffffff;
+  color: #111111;
+
+  width: 95%;
+  max-width: 800px;
+
+  max-height: 85vh;        /* 👈 LIMIT HEIGHT TO VIEWPORT */
+  overflow-y: auto;        /* 👈 ENABLE SCROLLING */
+
+  padding: 40px;
+  border-radius: 12px;
+  position: relative;
+}
+
+/* Close button */
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  text-decoration: none;
+  color: #333;
+}
+/* Force dark text inside modal */
+.modal-content {
+  background: #ffffff;
+  color: #111111;        /* 👈 TEXT DARK */
+}
+
+/* Ensure all text elements stay dark */
+.modal-content h2,
+.modal-content p,
+.modal-content li,
+.modal-content a {
+  color: #111111;
+}
+
+
+/* Modal action section */
+.modal-actions {
+  margin-top: 25px;
+  text-align: left;
+}
+
+/* Black button */
+.btn-black {
+  background-color: #868383;
+  color: #ffffff;
+  padding: 12px 28px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.btn-black:hover {
+  background-color: #868383;
+}
+
+/* Video container */
+.modal-video {
+  margin-top: 20px;
+  margin-bottom: 25px;
+}
+
+/* Responsive video */
+.modal-video iframe,
+.modal-video video {
+  width: 100%;
+  height: 350px;
+  border-radius: 10px;
+}
+</style>
+
+<h1>My Projects</h1>
+
+<div class="container">
+    <div class="grid projects-grid">
+
+    <article class="project">
+      <img src="https://www.skoolbeep.com/blog/wp-content/uploads/2020/12/HOW-DO-YOU-DESIGN-A-LIBRARY-MANAGEMENT-SYSTEM-min.png" alt="Library Management System" width="90%" height="50%" class="project-img">
+      <h3>Library Management system</h3>
+      <p class="muted">A complete library management system built with Django. Features include user roles (admin/librarian/member), book checkout/return, search, and reporting.</p>
+      <div class="tags"><span>django</span><span>react</span><span>api</span></div>
+      <br>
+      <a href="#projectModal"><p><b>Click here for more details.</b></p></a>
+    </article>
+
+    <article class="project">
+      <img src="https://marketplace.canva.com/EdriA/MAFMW9EdriA/1/tl/canva-chat-bot-or-futuristic-head-with-different-emotions-and-symbols-on-face-vector-illustration.-cute-chatbot-avatar-flat-icon-MAFMW9EdriA.png" alt="DevBlog" width="90%" height="48%" class="project-img">
+      <h3>My Personal Chatbot "Nebula"</h3>
+      <p class="muted">Personal chatbot assistant to help and deliver messages to user's needs.</p>
+      <div class="tags"><span>python</span><span>ci</span></div>
+      <br><br>
+      <a href="#chatbot"><p><b>Click here for more details</b></p></a>
+    </article>
+
+    <article class="project">
+      <img src="https://cdn3d.iconscout.com/3d/premium/thumb/insurance-payment-9465495-7693433.png?f=webp" alt="Insurance CRM" width="90%" height="50%" class="project-img">
+      <h3>Insurance CRM</h3>
+      <p class="muted">This project is a specialized, full-featured Insurance CRM designed to empower agents and brokers by centralizing.</p>
+      <div class="tags"><span>node</span><span>docker</span><span>Python</span><span>JavaScript</span></div>
+      <br>
+      <a href="#InsuranceappModal"><p><b>Click here for more details. </b></p></a>
+    </article>
+
+
+    <article class="project">
+      <img src="https://www.simplymac.com/wp-content/uploads/Weather_iOS_151.png" alt="Insurance CRM" width="90%" height="50%" class="project-img">
+      <h3>Weather App</h3>
+      <p class="muted">Simple weather application to display current weather conditions and forecasts. Implemented a strong UI.</p>
+      <div class="tags"><span>Python</span><span>Django</span><span>JavaScript</span><span>JSON</span><span>API</span> </div>
+      <br>
+      <a href="#weatherappModal"><p><b>Click here for more details.</b></p></a>
+    </article>
+
+  </div>
+    
+</div>
+
+
+<!-- Project Modal section for Library Management System -->
+<div id="projectModal" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close">&times;</a>
+
+    <h2>Library Management System</h2>
+    <div class="modal-video">
+  <video controls>
+    <source src="{% static 'videos/Library.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+    <p class="muted">
+      This project is a comprehensive,Full stack Library Management System (LMS) designed to streamline and automate the core operations of a modern library, including cataloging, patron management, and book lending. 
+      It provides both administrative tools for library staff and a user friendly interface for patrons.
+    </p>
+
+    <ul>
+      <li>Allows library staff to easily add, update, and manage the entire book collection,
+        including details like title, author, ISBN, publication year, and available copies.</li>
+      <li>Implemented a robust search and filtering mechanism (e.g., by author, title, or genre) for quick retrieval of any book record.</li>
+      <li>Functionality to register, view, and manage patron accounts,storing essential data like name, contact information.
+        Includes logic for calculating and tracking late fees based on defined return policies.  </li>
+      <li> Provides real time updates on the availability status of every book (e.g : Available, Checked Out, Overdue)Generates comprehensive reports on inventory levels, 
+                        popular books, and overdue items to aid management decisions. </li>
+    </ul>
+
+    <h3>Tech Stack Used</h3>
+    <i class="fa-brands fa-bootstrap fa-3x"></i> <i class="fa-brands fa-python fa-3x"></i> <i class="fa-brands fa-js fa-3x"></i> <i class="fa-brands fa-html5 fa-3x"></i> <i class="fa-solid fa-database fa-3x"></i> <i class="fa-brands fa-css3-alt fa-3x"></i>
+    <br>
+    
+    <!-- github section -->
+    <div class="modal-actions">
+  <a href="https://github.com/Soorajtechyiii/Librarymanagement-.git" 
+     target="_blank" 
+     class="btn btn-black">
+     Get Code
+  </a>
+</div>
+
+  </div>
+</div>
+
+<!-- weather app modal section -->
+<div id="weatherappModal" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close">&times;</a>
+
+    <h2>Weather App</h2>
+    <div class="modal-video">
+  <video controls>
+    <source src="{% static 'videos/weatherapp.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+    <p class="muted">
+      This project demonstrates the ability to manage asynchronous API calls and transform  raw JSON data into a user-friendly dashboard for weather app.
+    </p>
+
+    <ul>
+      <li>API calls and transform raw JSON data into a user-friendly dashboard.</li>
+      <li>Search weather details by city name.Display real-time temperature and weather conditions.</li>
+      <li> Fast and light-weight performance.It features a clean and intuitive interface that ensures a smooth user experience across devices, including desktops, tablets, and mobile phones.
+         </li>
+    </ul>
+
+    <h3>Tech Stack Used</h3>
+    <i class="fa-brands fa-bootstrap fa-3x"></i> <i class="fa-brands fa-python fa-3x"></i> <i class="fa-brands fa-js fa-3x"></i> <i class="fa-brands fa-html5 fa-3x"></i> <i class="fa-solid fa-database fa-3x"></i> <i class="fa-brands fa-css3-alt fa-3x"></i>
+    <br>
+    
+    <!-- github section -->
+    <div class="modal-actions">
+  <a href=" https://github.com/Soorajtechyiii/weather-application.git" 
+     target="_blank" 
+     class="btn btn-black">
+     Get Code
+  </a>
+</div>
+
+  </div>
+</div>
+
+
+<!-- Insurance CRM section -->
+<div id="InsuranceappModal" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close">&times;</a>
+
+    <h2>Insurance CRM</h2>
+    <div class="modal-video">
+  <video controls>
+    <source src="{% static 'videos/Insurance.mp4' %}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+</div>
+    <p class="muted">
+      An Insurance CRM (Customer Relationship Management) system is a centralized software platform designed to help insurance companies, 
+      agents, and brokers efficiently manage customers, policies, leads, claims, and follow-ups throughout the insurance lifecycle.
+    </p>
+
+    <ul>
+      <li>Organize customer and policy data in one place.</li>
+      <li>Store complete customer profiles (personal, contact, KYC details).</li>
+      <li>Track multiple policies per client.View policy status (active, expired, pending)
+         </li>
+      <li>Capture leads from calls, websites, and referrals.Assign leads to agents.Follow-up reminders and status tracking. </li>
+    </ul>
+
+    <h3>Tech Stack Used</h3>
+    <i class="fa-brands fa-bootstrap fa-3x"></i> <i class="fa-brands fa-python fa-3x"></i> <i class="fa-brands fa-js fa-3x"></i> <i class="fa-brands fa-html5 fa-3x"></i> <i class="fa-solid fa-database fa-3x"></i> <i class="fa-brands fa-css3-alt fa-3x"></i>
+    <br>
+    
+    <!-- github section -->
+    <div class="modal-actions">
+  <a href="https://github.com/Soorajtechyiii/Insurance-CRM.git" 
+     target="_blank" 
+     class="btn btn-black">
+     Get Code
+  </a>
+</div>
+
+  </div>
+</div>
+
+<!-- chatbot modal section -->
+<div id="chatbot" class="modal">
+  <div class="modal-content">
+    <a href="#" class="modal-close">&times;</a>
+
+    <h2>Chatbot "Nebula"</h2>
+    <div class="modal-video">
+</div>
+    <p class="muted">
+      The AI-Based Chatbot is an intelligent conversational application designed to interact with users through text-based communication.
+    </p>
+
+    <ul>
+      <li>The system improves user experience by offering 24/7 support, reducing response time, and automating repetitive tasks.</li>
+      <li>It can be deployed on websites, mobile applications, or messaging platforms.</li>
+      <li>Reduces manual workload,Scalable and customizable,User-friendly interface.
+         </li>
+    </ul>
+
+    <h3>Tech Stack Used</h3>
+    <i class="fa-brands fa-bootstrap fa-3x"></i> <i class="fa-brands fa-python fa-3x"></i> <i class="fa-brands fa-js fa-3x"></i> <i class="fa-brands fa-html5 fa-3x"></i> <i class="fa-solid fa-database fa-3x"></i> <i class="fa-brands fa-css3-alt fa-3x"></i>
+    <br>
+    
+    <!-- github section -->
+    <div class="modal-actions">
+  <a href=" https://github.com/Soorajtechyiii/weather-application.git" 
+     target="_blank" 
+     class="btn btn-black">
+     Get Code
+  </a>
+</div>
+
+  </div>
+</div>
+
+
+
+{% endblock %}
